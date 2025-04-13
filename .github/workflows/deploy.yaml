@@ -1,8 +1,8 @@
-name: Deploy Workflow
+name: Deploy service
 on: workflow_call
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ secrets.TEST }} - ${{ vars.AWS_ACCESS_KEY_ID }}"
+      - run: echo "${{ secrets.TEST }} - ${{ vars.TEST }}"

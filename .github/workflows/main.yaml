@@ -4,9 +4,9 @@ on:
     branches: [main]
 
 jobs:
-  call-build:
+  build:
     uses: ./.github/workflows/build.yaml
 
-  call-deploy:
-    needs: call-build
+  deploy:
+    needs: build
     uses: ./.github/workflows/deploy.yaml
