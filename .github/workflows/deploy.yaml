@@ -4,5 +4,9 @@ on: workflow_call
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    
     steps:
-      - run: echo "${{ secrets.TEST_S }} - ${{ vars.TEST }}"
+      - env:
+          SUPER_SECRET: ${{ secrets.TEST_S }}
+        run: echo "${{ $SUPER_SECRET }} - ${{ vars.TEST }}"
+        
