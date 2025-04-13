@@ -5,4 +5,4 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ secrets.TEST }} - ${{ vars.TEST }}"
+      - run: echo "${{ secrets.TEST_S }} - ${{ vars.TEST }}"
