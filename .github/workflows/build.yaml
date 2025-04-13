@@ -5,7 +5,4 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - env:
-          ECR_REPO: <ECR_REPO_URL>
-        run: |
-          docker build -t desafio-app /app/.
+      - run: docker build -t desafio-app -f app/Dockerfile app/
