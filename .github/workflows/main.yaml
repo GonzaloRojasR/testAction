@@ -1,0 +1,12 @@
+name: Main pipeline
+on:
+  push:
+    branches: [main]
+
+jobs:
+  call-build:
+    uses: ./.github/workflows/build.yaml
+
+  call-deploy:
+    needs: call-build
+    uses: ./.github/workflows/deploy.yaml
