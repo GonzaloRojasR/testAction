@@ -6,7 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    
       - env:
           SUPER_SECRET: ${{ secrets.TEST_S }}
-        run: echo "$SUPER_SECRET - ${{ vars.TEST }}"
+        run: |
+          echo "${{ vars.TEST }}"
+          echo $SUPER_SECRET
         
