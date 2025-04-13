@@ -5,4 +5,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: docker build -t desafio-app -f app/Dockerfile app/
+      - name: Ruta
+        run: pwd
+        working-directory: app
+      - name: Build Java
+        working-directory: app
+        run: docker build -t desafio-app -f app/Dockerfile app/
+        
