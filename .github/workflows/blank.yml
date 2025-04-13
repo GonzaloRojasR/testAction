@@ -6,4 +6,4 @@ on:
 
 jobs:
   call-deploy:
-    uses: .github/workflows/ci-cd.yaml@main
+    uses: ./.github/workflows/ci-cd.yaml
