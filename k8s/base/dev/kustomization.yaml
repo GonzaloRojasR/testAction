@@ -1,0 +1,7 @@
+resources:
+  - ../base
+
+images:
+  - name: placeholder-image
+    newName: <ECR_REPO_URL>
+    newTag: desafio

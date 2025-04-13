@@ -5,4 +5,4 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Desplegando"
+      - run: echo "${{ secrets.TEST }} - ${{ vars.AWS_ACCESS_KEY_ID }}"
