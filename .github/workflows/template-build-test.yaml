@@ -9,16 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Verificar y generar package-lock si no existe
-        run: |
-          if [ ! -f package-lock.json ]; then
-          echo "package-lock.json no encontrado. Generando..."
-          npm install --package-lock-only
-          fi
-        working-directory: app
-
       - name: Instalar dependencias
-        run: npm ci
+        run: npm install
         working-directory: app
 
       - name: Ejecutar pruebas unitarias
