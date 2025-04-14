@@ -1,4 +1,5 @@
 name: Main pipeline
+
 on:
   push:
     branches: [main]
@@ -10,3 +11,7 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/deploy.yaml
+    secrets:
+      TEST_S: ${{ secrets.TEST_S }}
+    with:
+      TEST: ${{ vars.TEST }}
