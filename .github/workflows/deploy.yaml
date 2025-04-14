@@ -4,10 +4,10 @@ on: workflow_call
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:    
-      - env:
-          SUPER_SECRET: ${{ secrets.TEST_S }}
-        run: |
-          echo "${{ vars.TEST }}"
-          echo ${#SUPER_SECRET}
-        
+    env:
+      SUPER_SECRET: ${{ secrets.TEST_S }}
+    steps:
+      - run: |
+          echo "VAR: ${{ vars.TEST }}"
+          echo "SECRET: [$SUPER_SECRET]"
+          echo "LENGTH: ${#SUPER_SECRET}"
