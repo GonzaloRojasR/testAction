@@ -6,15 +6,15 @@ on:
 
 jobs:
   build-test:
-    uses: ./.github/workflows/templat/build-test.yaml
+    uses: ./.github/workflows/template-build-test.yaml
 
   dockerize:
     needs: build-test
-    uses: ./.github/workflows/template/build_image.yaml
+    uses: ./.github/workflows/template-build_image.yaml
 
   deploy:
     needs: dockerize
-    uses: ./.github/workflows/template/deploy.yaml
+    uses: ./.github/workflows/template-deploy.yaml
     secrets:
       TEST_S: ${{ secrets.TEST_S }}
     with:
