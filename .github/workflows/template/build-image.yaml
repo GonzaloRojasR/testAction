@@ -1,0 +1,20 @@
+name: Build Docker Image
+
+on: workflow_call
+
+jobs:
+  dockerize:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: app-build
+          path: app/
+
+      - name: Mostrar archivos del build
+        run: ls -R app
+
+      - name: Build imagen docker
+        run: docker build -t desafio-app:latest -f app/Dockerfile app/

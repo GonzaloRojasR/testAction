@@ -1,0 +1,27 @@
+name: Build & Test
+
+on: workflow_call
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Instalar dependencias
+        run: npm ci
+        working-directory: app
+
+      - name: Ejecutar pruebas unitarias
+        run: npm test
+        working-directory: app
+
+      - name: Crear directorio temporal para artifact
+        run: mkdir -p build && cp -R app/* build/
+
+      - name: Subir artifact compilado
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-build
+          path: build/

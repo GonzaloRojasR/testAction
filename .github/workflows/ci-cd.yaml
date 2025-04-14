@@ -1,0 +1,26 @@
+name: Main pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-test:
+    uses: ./.github/workflows/templat/build-test.yaml
+
+  dockerize:
+    needs: build-test
+    uses: ./.github/workflows/template/build_image.yaml
+
+  deploy:
+    needs: dockerize
+    uses: ./.github/workflows/template/deploy.yaml
+    secrets:
+      TEST_S: ${{ secrets.TEST_S }}
+    with:
+      TEST: ${{ vars.TEST }}
+    #secrets:
+    #  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #with:
+    #  IMAGE_TAG: ${{ github.sha }}
