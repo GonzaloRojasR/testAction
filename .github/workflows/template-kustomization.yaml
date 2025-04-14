@@ -14,10 +14,9 @@ jobs:
           curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
           sudo mv kustomize /usr/local/bin/
 
-      - name: Aplicar manifiesto generado
-        working-directory: k8s/dev
+      - name: Aplicar manifiesto generado        
         run: |
-          kustomize build . 
+          kustomize build k8s/dev
 
       - name: Validar kustomization (dry-run)
         run: |
