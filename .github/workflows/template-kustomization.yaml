@@ -3,7 +3,7 @@ name: Kustomization
 on: workflow_call
 
 jobs:
-  dockerize:
+  kustomize:
     runs-on: ubuntu-latest
 
     steps:
