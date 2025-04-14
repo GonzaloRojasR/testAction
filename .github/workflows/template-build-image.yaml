@@ -18,3 +18,8 @@ jobs:
 
       - name: Build imagen docker
         run: docker build -t desafio-app:latest -f app/Dockerfile app/
+
+      - name: Ver tamaño de la imagen
+        run: |
+          docker image inspect desafio-app:latest --format='Tamaño: {{ .Size }} bytes (~{{ div .Size 1000000 }} MB)'
+
