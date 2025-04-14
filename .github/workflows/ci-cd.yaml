@@ -10,7 +10,7 @@ jobs:
 
   dockerize:
     needs: build-test
-    uses: ./.github/workflows/template-build_image.yaml
+    uses: ./.github/workflows/template-build-image.yaml
 
   deploy:
     needs: dockerize
