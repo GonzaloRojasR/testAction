@@ -1,0 +1,23 @@
+name: Kustomization
+
+on: workflow_call
+
+jobs:
+  dockerize:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Instalar Kustomize
+      run: |
+        curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+        sudo mv kustomize /usr/local/bin/
+
+    - name: Aplicar manifiesto generado
+      working-directory: k8s/dev
+      run: |
+        kustomize build . 
+
+    - name: Validar kustomization (dry-run)
+      run: |
+        kubectl apply --dry-run=client -k k8s/dev
+
