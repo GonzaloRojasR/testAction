@@ -19,6 +19,7 @@ jobs:
           echo "test"
           export "name=$(jq -r .name package.json)"
           echo "${name}"
+          echo "name=$NAME" >> $GITHUB_OUTPUT
           echo "fin test"
 
       - name: Install dependencies
