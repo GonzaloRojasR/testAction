@@ -23,6 +23,9 @@ jobs:
         with:
           name: app-build
           path: app/
+      
+      - name: print image_name
+        run: echo ${{ inputs.image_name }}
 
       - name: Build imagen docker
         run: docker build -t ${{ inputs.image_name }}:latest -f app/Dockerfile app/
