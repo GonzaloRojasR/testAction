@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      image_name: ${{ steps.metadata.outputs.name }}
+      image_name: ${{ steps.extraer_nombre.outputs.name }}
 
     steps:
       - uses: actions/checkout@v3
@@ -16,18 +16,18 @@ jobs:
         working-directory: app
         run: npm install
 
-      - name: Ejecutar pruebas unitarias
+      - name: Ejecutar pruebas
         working-directory: app
         run: npm test
 
       - name: Extraer nombre del paquete
-        id: metadata
+        id: extraer_nombre
         working-directory: app
         run: |
           NAME=$(jq -r .name package.json)
           echo "name=$NAME" >> $GITHUB_OUTPUT
 
-      - name: Subir artifact compilado
+      - name: Subir artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-build

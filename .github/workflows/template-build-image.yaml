@@ -10,6 +10,7 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -19,10 +20,10 @@ jobs:
           name: app-build
           path: app/
 
-      - name: Verificar nombre de imagen
-        run: echo "Nombre recibido -> ${{ inputs.image_name }}"
+      - name: Debug nombre recibido
+        run: echo "Nombre recibido: ${{ inputs.image_name }}"
 
-      - name: Build imagen Docker
+      - name: Build imagen
         run: docker build -t ${{ inputs.image_name }}:latest -f app/Dockerfile app/
 
       - name: Mostrar tamaño de la imagen Docker
