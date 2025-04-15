@@ -1,4 +1,3 @@
-# .github/workflows/template-build-test.yaml
 name: Output Generator
 
 on: workflow_call
@@ -13,5 +12,4 @@ jobs:
     steps:
       - name: Crear valor ficticio
         id: get_name
-        run: |
-          echo "value=desafio-app" >> $GITHUB_OUTPUT
+        run: echo "value=desafio-app" >> $GITHUB_OUTPUT
