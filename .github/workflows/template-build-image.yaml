@@ -10,40 +10,23 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
-      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-      
     steps:
-      - name: Download artifact
+      - uses: actions/checkout@v3
+
+      - name: Descargar artifact
         uses: actions/download-artifact@v4
         with:
           name: app-build
           path: app/
-      
-      - name: print image_name
-        run: echo ${{ inputs.image_name }}
 
-      - name: Build imagen docker
-        run: docker build -t ${{ inputs.image_name }}:latest -f app/Dockerfile app/s
+      - name: Verificar nombre de imagen
+        run: echo "Nombre recibido: ${{ inputs.image_name }}"
+
+      - name: Build imagen Docker
+        run: docker build -t ${{ inputs.image_name }}:latest -f app/Dockerfile app/
 
       - name: Mostrar tamaño de la imagen Docker
         run: |
           IMAGE_ID=$(docker images -q ${{ inputs.image_name }}:latest)
           IMAGE_SIZE=$(docker image inspect $IMAGE_ID --format='{{.Size}}')
           echo "Tamaño de la imagen: $((IMAGE_SIZE / 1000000)) MB"
-
-#      - name: Login en ECR
-#        run: |
-#          aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
-#
-#      - name: Taggear imagen para ECR
-#        run: |
-#          docker tag ${{ inputs.image_name }}:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/${{ inputs.image_name }}:latest
-#
-#      - name: Push a ECR
-#        run: |
-#          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/${{ inputs.image_name }}:latest

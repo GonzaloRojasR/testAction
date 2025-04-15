@@ -1,4 +1,4 @@
-name: Pipeline despliegue
+name: Main pipeline
 
 on:
   push:
@@ -13,15 +13,4 @@ jobs:
     uses: ./.github/workflows/template-build-image.yaml
     with:
       image_name: ${{ needs.build-test.outputs.image_name }}
-    
-  kustomize:
-    needs: docker
-    uses: ./.github/workflows/template-kustomization.yaml
 
-  deploy:
-    needs: kustomize
-    uses: ./.github/workflows/template-deploy.yaml
-    secrets:
-      TEST_S: ${{ secrets.TEST_S }}
-    with:
-      TEST: ${{ vars.TEST }}    

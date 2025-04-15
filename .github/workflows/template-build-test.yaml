@@ -1,4 +1,4 @@
-name: Template - Build & Test
+name: Template - Build y Test
 
 on: workflow_call
 
@@ -12,33 +12,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Service name
-        id: metadata
-        working-directory: app
-        run: |
-          echo "test"
-          export "name=$(jq -r .name package.json)"
-          echo "${name}"
-          echo "name=$NAME" >> $GITHUB_OUTPUT
-          echo "fin test"
-
-      - name: Install dependencies
+      - name: Instalar dependencias
         working-directory: app
         run: npm install
-        
-      - name: Unit tests
+
+      - name: Ejecutar pruebas unitarias
         working-directory: app
         run: npm test
 
-      - name: Lint
+      - name: Extraer nombre del paquete
+        id: metadata
         working-directory: app
-        run: npx eslint src/
-     
-      - name: Directory for artifact
-        run: mkdir -p build && cp -R app/* build/
+        run: |
+          NAME=$(jq -r .name package.json)
+          echo "name=$NAME" >> $GITHUB_OUTPUT
 
-      - name: Upload compiled artifact
+      - name: Subir artifact compilado
         uses: actions/upload-artifact@v4
         with:
           name: app-build
-          path: build/
+          path: app/
