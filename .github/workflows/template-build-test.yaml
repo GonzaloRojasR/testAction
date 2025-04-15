@@ -28,8 +28,10 @@ jobs:
         id: metadata
         working-directory: app
         run: |
+          echo "test"
           echo "name=$(jq -r .name package.json)" >> $GITHUB_OUTPUT
-          echo ${name}
+          echo "${name}"
+          echo "fin test"
 
       - name: Directory for artifact
         run: mkdir -p build && cp -R app/* build/
