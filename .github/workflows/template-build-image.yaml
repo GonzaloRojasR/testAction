@@ -14,4 +14,4 @@ jobs:
 
     steps:
       - name: Imprimir valor recibido
-        run: echo "Recibido-> ${{ inputs.test_value }}"
+        run: echo "Recibido -> ${{ inputs.test_value }}"
