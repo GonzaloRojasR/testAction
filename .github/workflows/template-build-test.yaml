@@ -12,6 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Service name
+        id: metadata
+        working-directory: app
+        run: |
+          echo "test"
+          echo "name=$(jq -r .name package.json)" >> $GITHUB_OUTPUT
+          echo "${name}"
+          echo "fin test"
+
       - name: Install dependencies
         working-directory: app
         run: npm install
@@ -23,16 +32,7 @@ jobs:
       - name: Lint
         working-directory: app
         run: npx eslint src/
-
-      - name: Service name
-        id: metadata
-        working-directory: app
-        run: |
-          echo "test"
-          echo "name=$(jq -r .name package.json)" >> $GITHUB_OUTPUT
-          echo "${name}"
-          echo "fin test"
-
+     
       - name: Directory for artifact
         run: mkdir -p build && cp -R app/* build/
 
