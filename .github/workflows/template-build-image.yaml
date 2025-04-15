@@ -20,7 +20,7 @@ jobs:
           path: app/
 
       - name: Verificar nombre de imagen
-        run: echo "Nombre recibido: ${{ inputs.image_name }}"
+        run: echo "Nombre recibido -> ${{ inputs.image_name }}"
 
       - name: Build imagen Docker
         run: docker build -t ${{ inputs.image_name }}:latest -f app/Dockerfile app/
