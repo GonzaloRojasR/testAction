@@ -10,7 +10,6 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-      IMAGE_NAME=$(jq -r .name app/package.json)
 
     steps:
       - name: Download artifact
@@ -22,8 +21,11 @@ jobs:
       - name: Show build files
         run: ls -R app
 
-      - name: Show image
-        run: echo $IMAGE_NAME
+      - name: Obtener nombre desde package.json
+        id: imagen
+        run: |
+          echo "IMAGE_NAME=$(jq -r .name app/package.json)" >> $GITHUB_ENV
+          echo $IMAGE_NAME
 
       - name: Build imagen docker
         run: docker build -t desafio-app:latest -f app/Dockerfile app/
