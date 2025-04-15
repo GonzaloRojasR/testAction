@@ -1,4 +1,4 @@
-name: Build & Test
+name: Template - Build y Test
 
 on: workflow_call
 
@@ -16,7 +16,11 @@ jobs:
       - name: Ejecutar pruebas unitarias
         working-directory: app
         run: npm test
-        
+
+      - name: Lint con ESLint
+        working-directory: app
+        run: npx eslint src/
+            
       - name: Crear directorio temporal para artifact
         run: mkdir -p build && cp -R app/* build/
 

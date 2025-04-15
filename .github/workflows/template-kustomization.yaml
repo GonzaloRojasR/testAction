@@ -1,9 +1,9 @@
-name: Kustomization
+name: Template - Kustomization
 
 on: workflow_call
 
 jobs:
-  kustomize:
+  kustomization:
     runs-on: ubuntu-latest
 
     steps:

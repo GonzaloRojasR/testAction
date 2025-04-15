@@ -1,9 +1,9 @@
-name: Build Docker Image
+name: Template - Docker
 
 on: workflow_call
 
 jobs:
-  dockerize:
+  docker:
     runs-on: ubuntu-latest
 
     steps:
