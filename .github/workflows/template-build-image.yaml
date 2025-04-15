@@ -21,7 +21,7 @@ jobs:
           path: app/
 
       - name: Debug nombre recibido
-        run: echo "Nombre recibido: ${{ inputs.image_name }}"
+        run: echo "Nombre recibido -> ${{ inputs.image_name }}"
 
       - name: Build imagen
         run: docker build -t ${{ inputs.image_name }}:latest -f app/Dockerfile app/
