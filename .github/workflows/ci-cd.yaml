@@ -12,5 +12,7 @@ jobs:
     needs: build-test
     uses: ./.github/workflows/template-build-image.yaml
     with:
-      image_name: ${{ needs.build-test.outputs.image_name }}
+      #image_name: ${{ needs.build-test.outputs.image_name }}      
+      image_name: test-dummy
+
 
