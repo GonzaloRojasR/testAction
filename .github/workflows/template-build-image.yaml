@@ -22,5 +22,8 @@ jobs:
       - name: Mostrar nombre de la imagen
         run: echo "Nombre de la imagen $IMAGE_NAME"
 
+      - name: Test
+        run: jq -r .name app/package.json
+
       - name: Build imagen docker
         run: docker build -t $IMAGE_NAME:latest -f app/Dockerfile app/
