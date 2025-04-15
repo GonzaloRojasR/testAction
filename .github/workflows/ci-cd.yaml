@@ -1,30 +1,37 @@
-name: Pipeline despliegue
+name: CI/CD Infraestructura
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Ambiente a desplegar"
+        required: true
+        default: "dev"
 
 jobs:
-  build-test:
-    uses: ./.github/workflows/template-build-test.yaml
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/terraform
 
-  docker:
-    needs: build-test
-    uses: ./.github/workflows/template-build-image.yaml
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
 
-  kustomize:
-    needs: docker
-    uses: ./.github/workflows/template-kustomization.yaml
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.6
 
-  deploy:
-    needs: kustomize
-    uses: ./.github/workflows/template-deploy.yaml
-    secrets:
-      TEST_S: ${{ secrets.TEST_S }}
-    with:
-      TEST: ${{ vars.TEST }}
-    #secrets:
-    #  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #with:
-    #  IMAGE_TAG: ${{ github.sha }}
+      - name: Inicializar Terraform
+        run: terraform init
+
+      - name: Validar configuración
+        run: terraform validate
+
+      - name: Planificar cambios
+        run: terraform plan -var-file=environments/${{ github.event.inputs.environment }}/terraform.tfvars -out=tfplan
+
+      - name: Aplicar cambios
+        run: terraform apply -auto-approve tfplan
