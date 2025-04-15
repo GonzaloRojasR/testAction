@@ -8,12 +8,12 @@ jobs:
   build-test:
     uses: ./.github/workflows/template-build-test.yaml
 
-  dockerize:
+  docker:
     needs: build-test
     uses: ./.github/workflows/template-build-image.yaml
 
   kustomize:
-    needs: dockerize
+    needs: docker
     uses: ./.github/workflows/template-kustomization.yaml
 
   deploy:
