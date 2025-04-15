@@ -17,7 +17,7 @@ jobs:
         working-directory: app
         run: |
           echo "test"
-          echo "name=$(jq -r .name package.json)" >> $GITHUB_OUTPUT
+          echo "name=$(jq -r .name package.json)"
           echo "${name}"
           echo "fin test"
 
