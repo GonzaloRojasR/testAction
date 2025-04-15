@@ -16,12 +16,11 @@ jobs:
         run: ls -R app
 
       - name: Obtener nombre desde package.json
-        id: imagen
         run: |
           echo "IMAGE_NAME=$(jq -r .name app/package.json)" >> $GITHUB_ENV
 
       - name: Mostrar nombre de la imagen
-        run: echo "Nombre de la imagen: $IMAGE_NAME"
+        run: echo "Nombre de la imagen $IMAGE_NAME"
 
       - name: Build imagen docker
         run: docker build -t $IMAGE_NAME:latest -f app/Dockerfile app/
