@@ -1,4 +1,4 @@
-name: Template - Build y Test
+name: Template - Build & Test
 
 on: workflow_call
 
@@ -9,22 +9,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Instalar dependencias
+      - name: Install dependencies
         working-directory: app
         run: npm install
         
-      - name: Ejecutar pruebas unitarias
+      - name: Unit tests
         working-directory: app
         run: npm test
 
-      - name: Lint con ESLint
+      - name: Lint
         working-directory: app
         run: npx eslint src/
             
-      - name: Crear directorio temporal para artifact
+      - name: Directory for artifact
         run: mkdir -p build && cp -R app/* build/
 
-      - name: Subir artifact compilado
+      - name: Upload compiled artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-build

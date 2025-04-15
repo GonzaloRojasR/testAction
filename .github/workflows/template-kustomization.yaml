@@ -9,12 +9,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Instalar Kustomize
+      - name: Install Kustomize
         run: |
           curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
           sudo mv kustomize /usr/local/bin/
 
-      - name: Aplicar manifiesto generado
+      - name: Apply manifest
         working-directory: k8s/dev
         run: |
           kustomize build .
