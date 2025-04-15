@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 app.get("/desafio", (req, res) => {
-  res.send('¡Hola Mundo!');
+  res.send("¡Hola Mundo!");
 });
 
 if (require.main === module) {
