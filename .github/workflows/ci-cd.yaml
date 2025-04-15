@@ -7,10 +7,10 @@ on:
 
 jobs:
   generate:
-    uses: ./.github/workflows/template-output.yaml
+    uses: ./.github/workflows/template-build-test.yaml
 
   consume:
     needs: generate
-    uses: ./.github/workflows/template-use-output.yaml
+    uses: ./.github/workflows/template-build-image.yaml
     with:
       test_value: ${{ needs.generate.outputs.test_value }}

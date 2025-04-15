@@ -1,4 +1,4 @@
-# .github/workflows/template-use-output.yaml
+# .github/workflows/template-build-image.yaml
 name: Output Consumer
 
 on:

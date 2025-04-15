@@ -1,4 +1,4 @@
-# .github/workflows/template-output.yaml
+# .github/workflows/template-build-test.yaml
 name: Output Generator
 
 on: workflow_call
